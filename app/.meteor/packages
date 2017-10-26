@@ -19,10 +19,13 @@ ejson@1.0.14
 check@1.2.5
 standard-minifier-js@2.1.2
 shell-server@0.2.4
+mdg:validation-error
+reactive-dict@1.1.9
+momentjs:moment
+dynamic-import
 
 # Collection utilities
-
-# Form processing utilities
+aldeed:collection2-core@2.0.0
 
 # Loading spinner
 sacha:spin
@@ -37,19 +40,14 @@ zimme:active-route
 kadira:blaze-layout
 arillo:flow-router-helpers
 
-# Semantic UI (and packages to integrate with accounts and autoform)
+# Semantic UI
 semantic:ui
 juliancwirko:postcss
 less@2.7.9
 useraccounts:semantic-ui
 
-# For prototyping purposes, enable autopublish and insecure
+# For prototyping purposes, enable insecure
 insecure@1.0.7
 
-
-mdg:validation-error
-reactive-dict@1.1.9
-momentjs:moment
+# Full Calendar
 fullcalendar:fullcalendar
-dynamic-import
-aldeed:collection2-core@2.0.0
