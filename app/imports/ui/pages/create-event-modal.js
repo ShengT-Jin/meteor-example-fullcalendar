@@ -3,9 +3,11 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { _ } from 'meteor/underscore';
+import { $ } from 'meteor/jquery';
 import { EventData, EventDataSchema } from '../../api/eventdata/eventdata.js';
 
 /* eslint-disable object-shorthand, no-unused-vars, no-param-reassign */
+/* global document */
 
 const displayErrorMessages = 'displayErrorMessages';
 
@@ -33,7 +35,7 @@ Template.Create_Event_Modal.onRendered(function enableSemantic() {
 Template.Create_Event_Modal.events({
   'submit .session-data-form'(event, instance) {
     event.preventDefault();
-    let newEvent = Session.get('eventModal');
+    let newEvent = Session.get('eventModal'); //eslint-disable-line
 
     // Get the title of the event.
     const title = event.target.title.value;
@@ -53,8 +55,8 @@ Template.Create_Event_Modal.events({
     }
 
     // Store the start and end time as integers.
-    const startValue = parseInt(event.target.start.value);
-    const endValue = parseInt(event.target.end.value);
+    const startValue = parseInt(event.target.start.value, 10);
+    const endValue = parseInt(event.target.end.value, 10);
 
     // Store the start and end time in a string format.
     const startString = f.options[f.selectedIndex].text;
