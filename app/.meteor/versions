@@ -2,12 +2,7 @@ accounts-base@1.3.6
 accounts-password@1.4.2
 accounts-ui@1.1.9
 accounts-ui-unstyled@1.2.1
-aldeed:autoform@5.8.1
-aldeed:collection2@2.10.0
-aldeed:collection2-core@1.2.0
-aldeed:schema-deny@1.1.0
-aldeed:schema-index@1.1.1
-aldeed:simple-schema@1.5.3
+aldeed:collection2-core@2.0.1
 allow-deny@1.0.9
 arillo:flow-router-helpers@0.5.2
 autoupdate@1.3.12
@@ -39,7 +34,6 @@ ecmascript-runtime-server@0.4.1
 ejson@1.0.14
 email@1.2.3
 es5-shim@4.6.15
-fabienb4:autoform-semantic-ui@0.9.3
 fullcalendar:fullcalendar@2.9.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4
@@ -100,6 +94,7 @@ templating@1.3.2
 templating-compiler@1.3.3
 templating-runtime@1.3.2
 templating-tools@1.1.2
+tmeasday:check-npm-versions@0.3.1
 tracker@1.1.3
 ui@1.0.13
 underscore@1.0.10

@@ -5,7 +5,7 @@ This sample application illustrates how to implement a reactive calendar with [M
 * Displaying a calendar using the [Meteor fullcalendar package](https://atmospherejs.com/fullcalendar/fullcalendar).
 * Displaying forms using the [Semantic UI form classes](http://semantic-ui.com/collections/form.html).
 * Displaying modals rendered from a BlazeJS template using the [Semantic UI modal classes](http://semantic-ui.com/modules/modal.html).
-* Validating form data upon submission using [Meteor Simple Schema](https://github.com/aldeed/meteor-simple-schema).
+* Validating form data upon submission using [Simple Schema](https://github.com/aldeed/node-simple-schema).
 * Conditional display of page content using Reactive Dictionaries.
 * Inserting new documents into a MongoDB collection.
 
@@ -97,25 +97,31 @@ Clicking on an event will delete it.
 
 #### Displaying the Calendar
 
-The location of the calendar is defined using a `div` tag with the `id` field being the name of the calendar in [calendar-page.html#L5](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html#L5). The settings for the calendar are located in [calendar-page.js#L16](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L16).
+The location of the calendar is defined using a `div` tag with the `id` field being the name of the calendar in [calendar-page.html](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html). The settings for the calendar are located in [calendar-page.js](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js).
 
 #### Calendar Settings
 
-The configuration for the calendar begins at [calendar-page.js#L18](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L18). For this specific calendar, there is a title on the left, nothing in the center, and navigation buttons on the right. 
+The configuration for the calendar are in [calendar-page.js](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js). For this specific calendar, there is a title on the left, nothing in the center, and navigation buttons on the right. 
 
 #### FullCalendar Functions
 
 ##### events
 
-The JavaScript functions that enable functionality for the calendar are located after the configuration. The `events` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L25) fetches all of the events from the `EventData` Mongo collection. There's a [callback function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L32) that will run if there are any updates to `EventData`.
+The JavaScript functions that enable functionality for the calendar are located after the configuration. The `events` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js) fetches all of the events from the `EventData` Mongo collection. There's a [callback function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js) that will run if there are any updates to `EventData`.
 
 ##### eventRender
 
-The `eventRender` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L38) defines how the event will be rendered in the calendar. This function uses [template strings](http://courses.ics.hawaii.edu/ics314s17/morea/javascript-2/reading-es6-templates.html) to display the event title and start time. 
+The `eventRender` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js) defines how the event will be rendered in the calendar.  
 
 ##### dayClick
 
-The `dayClick` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L47) handles the event where a user clicks on a day on the calendar. Clicking on a day creates a [Session](https://docs.meteor.com/api/session.html) object that stores the date of the day that was clicked. The date information will be used later in [create-event-modal.js](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.js). There is a [condition](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L51) that checks if the day that was clicked on has already passed. This prevents users from creating new events in the past.
+The `dayClick` [function](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js) handles the event where a user clicks on a day on the calendar. 
+
+Clicking on a day creates a [Session](https://docs.meteor.com/api/session.html) object that stores the date of the day that was clicked. 
+
+The date information will be used later in [create-event-modal.js](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.js). 
+
+There is a [condition](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L51) that checks if the day that was clicked on has already passed. This prevents users from creating new events in the past.
 
 ##### eventClick
 
@@ -127,10 +133,14 @@ The `eventDrop` [function](https://github.com/ics-software-engineering/meteor-ex
 
 #### Tracker
 
-The [Tracker](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js#L81) at the bottom of `calendar-page.js` updates the calendar when there are changes made to the EventData collection.
+The [Tracker](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.js) at the bottom of `calendar-page.js` updates the calendar when there are changes made to the EventData collection.
  
 #### Create Event Modal
 
-The `create-event-modal` is created using the Semantic UI Modal class [here](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html#L9). All of the content for the `create-event-modal` is in the [Create_Event_modal template](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.html). The `create-event-modal` uses form processing that is similar to [meteor-example-form](https://ics-software-engineering.github.io/meteor-example-form/). Once entered information is validated, it is inserted into the `EventData` collection.
+The `create-event-modal` is created using the Semantic UI Modal class [here](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html#L9). 
+
+All of the content for the `create-event-modal` is in the [Create_Event_modal template](https://github.com/ics-software-engineering/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.html). 
+
+The `create-event-modal` uses form processing that is similar to [meteor-example-form](https://ics-software-engineering.github.io/meteor-example-form/). Once entered information is validated, it is inserted into the `EventData` collection.
 
 

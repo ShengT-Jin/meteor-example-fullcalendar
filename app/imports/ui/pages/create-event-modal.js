@@ -22,7 +22,7 @@ Template.Create_Event_Modal.helpers({
     return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
   displayFieldError(fieldName) {
-    const errorKeys = Template.instance().context.invalidKeys();
+    const errorKeys = Template.instance().context.validationErrors();
     return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
 });
@@ -65,19 +65,17 @@ Template.Create_Event_Modal.events({
     newEvent = { title, start, end, startValue, endValue, startString, endString };
 
     // Clear out any old validation errors.
-    instance.context.resetValidation();
+    instance.context.reset();
 
     // Invoke clean so that newEvent reflects what will be inserted.
-    EventDataSchema.clean(newEvent);
+    const cleanEvent = EventDataSchema.clean(newEvent);
 
     // Determine validity.
-    instance.context.validate(newEvent);
+    instance.context.validate(cleanEvent);
     if (instance.context.isValid()) {
-      EventData.insert(newEvent);
+      EventData.insert(cleanEvent);
       instance.messageFlags.set(displayErrorMessages, false);
-      $('#create-event-modal')
-          .modal('hide')
-      ;
+      $('#create-event-modal').modal('hide');
       FlowRouter.go('Calendar_Page');
     } else {
       instance.messageFlags.set(displayErrorMessages, true);
@@ -86,8 +84,6 @@ Template.Create_Event_Modal.events({
 
   'click .cancel'(event) {
     event.preventDefault();
-    $('#create-event-modal')
-        .modal('hide')
-    ;
+    $('#create-event-modal').modal('hide');
   },
 });

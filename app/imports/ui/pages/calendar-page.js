@@ -2,7 +2,6 @@ import { Tracker } from 'meteor/tracker';
 import { moment } from 'meteor/momentjs:moment';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { EventData } from '../../api/eventdata/eventdata';
 
@@ -68,7 +67,7 @@ Template.Calendar_Page.onRendered(() => {
       if (!isPast(date)) {
         const update = { _id: session._id, start: date, end: date };
         // Update the date of the event.
-        Meteor.call('editEvent', update);
+        EventData.update(update._id, { $set: update });
       } else {
         revert();
       }
